@@ -19,7 +19,7 @@ nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
 
 ### Constants
-path_to_scrapped_corpus = './data/abstracts_preprocessed_claire.csv'
+path_to_scrapped_corpus = './data/abstracts_preprocessed_claire.xlsx'
 
 pos_lem = {
     'NN': 'n',
@@ -38,7 +38,7 @@ pos_lem = {
 ###Main function
 def main_preprocessing(run_preprocessing=False):
     if run_preprocessing:
-        corpus = pd.read_csv(path_to_scrapped_corpus)
+        corpus = pd.read_excel(path_to_scrapped_corpus)
 
         print("-- Preprocessing :")
         prev_time = measure_time_step(0, True)  # Time
@@ -74,7 +74,7 @@ def main_preprocessing(run_preprocessing=False):
         corpus_prep = vectorize_corpus(corpus_prep, methods=[
             "tfidf"
             # 'w2v', "tfidf", 'tfidf_w2v_concat', 'w2v_tfidf', 'tfidf_w2v_tfidf_concat'
-        ], model=model)
+        ])#, model=model)
         prev_time = measure_time_step(prev_time)  # Time
 
         #corpus_prep = corpus_prep[corpus_prep['w2v_tfidf'].apply(lambda x: not (None in x))].reset_index()
